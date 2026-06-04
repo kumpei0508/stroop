@@ -224,7 +224,7 @@ function showNextStimulus() {
   if (currentTask.mode === "task1") {
     html = `
       <div class="stimulus" style="color:black;">${currentStimulus.word}</div>
-      <div class="task-text">表示された色名に対応するボタンを押してください。</div>
+      <div class="task-text">黒のインクで表示される<b>文字の意味<b>に対応するボタンを押してください。</div>
     `;
   }
 
@@ -238,14 +238,14 @@ function showNextStimulus() {
  if (currentTask.mode === "task3") {
   html = `
     <div class="stimulus" style="color:${currentStimulus.ink_css};">${currentStimulus.word}</div>
-    <div class="task-text">文字の意味に対応するボタンを押してください。</div>
+    <div class="task-text">文字の<b>インクの色<b>に対応するボタンを押してください。</div>
   `;
 }
 
   if (currentTask.mode === "task4") {
     html = `
       <div class="stimulus" style="color:${currentStimulus.ink_css};">${currentStimulus.word}</div>
-      <div class="task-text">文字の意味に惑わされず、<b>文字の色</b>に対応するボタンを押してください。</div>
+      <div class="task-text">文字の意味に惑わされず、文字の<b>インクの色</b>に対応するボタンを押してください。</div>
     `;
   }
 
@@ -295,14 +295,11 @@ function makeTask(name, title, instruction, mode, stimuli) {
   return {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
-      <div class="task-container">
-        <h2 style="font-size:clamp(28px, 6vw, 38px);">${title}</h2>
-        <p style="font-size:clamp(20px, 5vw, 26px);">${instruction}</p>
-        <p style="font-size:clamp(18px, 4.5vw, 24px);">制限時間は30秒です。</p>
-        <div id="stimulus-area"></div>
-        ${makeButtons()}
-      </div>
-    `,
+  <div class="task-container">
+    <div id="stimulus-area"></div>
+    ${makeButtons()}
+  </div>
+`,
     choices: "NO_KEYS",
     trial_duration: TASK_TIME,
     on_load: function() {
