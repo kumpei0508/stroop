@@ -204,8 +204,9 @@ const task1Stimuli = colors.map(c => ({
 const task2Stimuli = makeConflictStimuli("word");
 
 const task3Stimuli = colors.map(c => ({
-  patch: c.name,
-  patch_css: c.css,
+  word: c.name,
+  ink: c.name,
+  ink_css: c.css,
   correct: c.name
 }));
 
@@ -234,12 +235,12 @@ function showNextStimulus() {
     `;
   }
 
-  if (currentTask.mode === "task3") {
-    html = `
-      <div class="patch" style="background:${currentStimulus.patch_css};"></div>
-      <div class="task-text">色パッチに対応するボタンを押してください。</div>
-    `;
-  }
+ if (currentTask.mode === "task3") {
+  html = `
+    <div class="stimulus" style="color:${currentStimulus.ink_css};">${currentStimulus.word}</div>
+    <div class="task-text">文字の意味に対応するボタンを押してください。</div>
+  `;
+}
 
   if (currentTask.mode === "task4") {
     html = `
@@ -408,16 +409,16 @@ jsPsych.run([
   ),
 
   makeTaskInstruction(
-    "Task 3：ストループ統制課題",
-    "色パッチに対応するボタンを押してください。"
-  ),
-  makeTask(
-    "task3_stroop_control",
-    "Task 3：ストループ統制課題",
-    "色パッチに対応するボタンを押してください。",
-    "task3",
-    task3Stimuli
-  ),
+  "Task 3：ストループ統制課題",
+  "文字のインクの色に対応するボタンを押してください。"
+),
+makeTask(
+  "task3_stroop_control",
+  "Task 3：ストループ統制課題",
+  "文字のインクの色に対応するボタンを押してください。",
+  "task3",
+  task3Stimuli
+),
 
   makeTaskInstruction(
     "Task 4：ストループ干渉課題",
